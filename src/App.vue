@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import axios from 'axios';
+const axios = require('axios');
+
 export default {
   data() {
     return {
@@ -21,11 +22,12 @@ export default {
     };
   },
   methods: {
-    inputAdress(){
-      //関数内にaxiosを使用してAPIを叩く処理を記述する。
-      //APIのURLは「エンドポイント/postcode/パスパラメータ?クエリパラメータ」
-      axios.get('https://apis.postcode-jp.com/api/v4/postcodes/1000001?apikey=D7Z47W2ExYtYvjGRVc6pmORmb3VZOyBYMJ98Qcz')
-      //showAdressに住所を表示する。
+    async inputAdress(){
+      await axios.get(
+        `https://apis.postcode-jp.com/api/v4/postcodes/${this.showAdress}?apikey=D7Z47W2ExYtYvjGRVc6pmORmb3VZOyBYMJ98Qcz`
+        ).then((response) => {
+          this.showAdress = response;
+        })
     }
   }
 }
