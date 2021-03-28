@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="adress">
-      <input type="number" v-model="postNumber">
+      <input type="number" v-model="postcode">
       <button class="button" @click="inputAdress">住所自動入力</button>
     </div>
     <div id="result">
@@ -12,19 +12,19 @@
 </template>
 
 <script>
-const axios = require('axios');
+import axios from 'axios';
 
 export default {
   data() {
     return {
-      postNumber:'',
+      postcode:'',
       showAdress:'',
     };
   },
   methods: {
     async inputAdress(){
       await axios.get(
-        `https://apis.postcode-jp.com/api/v4/postcodes/${this.showAdress}?apikey=D7Z47W2ExYtYvjGRVc6pmORmb3VZOyBYMJ98Qcz`
+        `https://apis.postcode-jp.com/api/v4/postcodes/${this.postcode}?apikey=D7Z47W2ExYtYvjGRVc6pmORmb3VZOyBYMJ98Qcz`
         ).then((response) => {
           this.showAdress = response;
         })
